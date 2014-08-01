@@ -6,8 +6,8 @@ program
 .version('0.1.0')
 .option('--host [hostname]', 'Hostname. Default localhost')
 .option('--port [port]', 'Port. Default 27017')
-.option('-db, --database <database>', 'Specifies the name of the database to work with')
-.option('-gn, --gridfsnamespace [prefix]', 'The gridfs namespace (prefix) to work with. Default fs')
+.option('--database <database>', 'Specifies the name of the database to work with')
+.option('--gridfsnamespace [prefix]', 'The gridfs namespace (prefix) to work with. Default fs')
 .option('-u, --username [username]', 'Username')
 .option('-p, --password [password]', 'Password')
 .option('--replace', 'Replace file with PUT');
