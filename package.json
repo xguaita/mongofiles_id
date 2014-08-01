@@ -1,0 +1,39 @@
+{
+	"name": "mongofiles_id",
+	"description": "Utility for putting and getting files from MongoDB GridFS by _id.",
+	"version": "0.1.0",
+	"homepage": "https://github.com/xguaita/mongofiles_id",
+	"author": {
+		"name": "xguaita",
+		"url": "https://github.com/xguaita"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/xguaita/mongofiles_id.git"
+	},
+	"bugs": {
+		"url": "https://github.com/xguaita/mongofiles_id/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT"
+		}
+	],
+	"keywords": [
+		"cli",
+		"mongofiles",
+		"mongodb",
+		"gridfs",
+		"_id"
+	],
+	"preferGlobal": true,
+	"bin": {
+		"mongofiles_id": "./bin/mongofiles_id"
+	},
+	"engines": {
+		"node": ">=0.8"
+	},
+	"dependencies": {
+		"commander": "^2.3.0"
+	}
+}

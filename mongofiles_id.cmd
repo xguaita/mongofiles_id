@@ -1,0 +1,1 @@
+@node "%~dp0bin\mongofiles_id.js" %*
