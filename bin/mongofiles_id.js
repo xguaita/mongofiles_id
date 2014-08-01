@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
 var program= require('commander');
+var list= require('./list.js'); // Lists the files in the GridFS store
 
 program
 .version('0.1.0')
-.option('--host [hostname]', 'Hostname. Default localhost')
-.option('--port [port]', 'Port. Default 27017')
+.option('--host [hostname]', 'Hostname. Default localhost', 'localhost')
+.option('--port [port]', 'Port. Default 27017', 27017)
 .option('--database <database>', 'Specifies the name of the database to work with')
-.option('--gridfsnamespace [prefix]', 'The gridfs namespace (prefix) to work with. Default fs')
+.option('--gridfsnamespace [prefix]', 'The gridfs namespace (prefix) to work with. Default fs', 'fs')
 .option('-u, --username [username]', 'Username')
 .option('-p, --password [password]', 'Password')
 .option('--replace', 'Replace file with PUT');
@@ -15,8 +16,12 @@ program
 program
 .command('list [prefix]')
 .description('Lists the files in the GridFS store. Optionally limit the list of returned items to files that names begin with [prefix]')
-.action(function(){
-	console.log('Lists the files in the GridFS store');
+.action(function(prefix, options){
+	if (!options.parent.database) {
+		console.log('Error: <database> required');
+		process.exit(1);
+	}
+	list(prefix, options);
 });
 
 program
