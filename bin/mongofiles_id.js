@@ -2,6 +2,7 @@
 
 var program= require('commander');
 var list= require('./list.js'); // Lists the files in the GridFS store
+var search= require('./search.js'); // Search files in the GridFS store
 
 program
 .version('0.1.0')
@@ -27,8 +28,12 @@ program
 program
 .command('search <string>')
 .description('Lists the files in the GridFS store with names that match any portion of <string>')
-.action(function(string){
-	console.log('Lists the files in the GridFS store with names that match any portion of ' + string);
+.action(function(string, options){
+	if (!options.parent.database) {
+		console.log('Error: <database> required');
+		process.exit(1);
+	}
+	search(string, options);
 });
 
 program

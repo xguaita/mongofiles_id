@@ -1,9 +1,9 @@
 # mongofiles_id
-Utility for putting and getting files from MongoDB GridFS ***by _id***  
+Node.js CLI utility for putting and getting files from MongoDB GridFS by ***_id*** instead by *filename*  
 
-### Supported Commands (*in development*)
+### Supported Commands (*in slow development, I'm on vacations*)
 - [x] list
-- [ ] search
+- [x] search
 - [ ] get
 - [ ] delete
 - [ ] put
