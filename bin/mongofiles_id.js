@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-var program= require('commander');
-var list= require('./list.js'); // Lists the files in the GridFS store
-var search= require('./search.js'); // Search files in the GridFS store
+var program= require('commander'),
+	list= require('./list.js'), // Lists the files in the GridFS store
+	search= require('./search.js'), // Search files in the GridFS store
+	get= require('./get.js'); // Get a file in the GridFS store
 
 program
 .version('0.1.0')
@@ -37,10 +38,14 @@ program
 });
 
 program
-.command('get <_id>')
-.description('Copy the file specified by <_id> from GridFS storage to the local file system')
-.action(function(_id){
-	console.log('Copy the specified file by _id ' + _id + ' from GridFS storage to the local file system');
+.command('get <_id> <filename>')
+.description('Copy the file specified by <_id> from GridFS storage to the local file system as <filename>')
+.action(function(_id, filename, options){
+	if (!options.parent.database) {
+		console.log('Error: <database> required');
+		process.exit(1);
+	}
+	get(_id, filename, options);
 });
 
 program
