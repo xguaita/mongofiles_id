@@ -3,7 +3,8 @@
 var program= require('commander'),
 	list= require('./list.js'), // Lists the files in the GridFS store
 	search= require('./search.js'), // Search files in the GridFS store
-	get= require('./get.js'); // Get a file in the GridFS store
+	get= require('./get.js'), // Get a file from the GridFS store
+	del= require('./del.js'); // Delete a file from the GridFS store
 
 program
 .version('0.1.0')
@@ -58,8 +59,12 @@ program
 program
 .command('delete <_id>')
 .description('Delete the specified file by <_id> from GridFS storage')
-.action(function(_id){
-	console.log('Delete the specified file by ' + _id + ' from GridFS storage');
+.action(function(_id, options){
+	if (!options.parent.database) {
+		console.log('Error: <database> required');
+		process.exit(1);
+	}
+	del(_id, options);
 });
 
 

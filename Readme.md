@@ -5,7 +5,7 @@ Node.js CLI utility for putting and getting files from MongoDB GridFS by ***_id*
 - [x] list
 - [x] search
 - [x] get
-- [ ] delete
+- [x] delete
 - [ ] put
 
 ## License
