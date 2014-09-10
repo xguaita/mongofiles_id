@@ -40,7 +40,7 @@ module.exports = function(_id, filename, options) {
 			}
 
 			fs.writeFileSync(filename, data);
-			console.log('File with _id=' + _id + ' saved to ' + filename)
+			console.log('File with _id=' + _id + ' saved to ' + filename);
 
 			db.close();
 		});
