@@ -15,6 +15,7 @@ program
 .option('--gridfsnamespace [prefix]', 'The gridfs namespace (prefix) to work with. Default fs', 'fs')
 .option('-u, --username [username]', 'Username')
 .option('-p, --password [password]', 'Password')
+.option('--content_type [content_type]', 'Mime type of the file. Default binary/octet-stream', 'binary/octet-stream')
 .option('--replace', 'Replace file with PUT');
 
 program

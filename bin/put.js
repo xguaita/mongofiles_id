@@ -71,7 +71,7 @@ module.exports = function(filename, _id, options) {
 
 							// Write data to gridfs
 
-							grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename)}, function(err) {
+							grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename), content_type: opt.content_type}, function(err) {
 								if (err) {
 									console.log(err);
 									db.close(true);
@@ -85,7 +85,7 @@ module.exports = function(filename, _id, options) {
 						});
 					} else {
 						// Write data to gridfs
-						grid.put(data, {_id: oid, root: opt.gridfsnamespace}, function(err) {
+						grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename), content_type: opt.content_type}, function(err) {
 							if (err) {
 								console.log(err);
 								db.close(true);
