@@ -4,6 +4,7 @@ var program= require('commander'),
 	list= require('./list.js'), // Lists the files in the GridFS store
 	search= require('./search.js'), // Search files in the GridFS store
 	get= require('./get.js'), // Get a file from the GridFS store
+	put= require('./put.js'), // Insert/update a file to the GridFS store
 	del= require('./del.js'); // Delete a file from the GridFS store
 
 program
@@ -52,8 +53,12 @@ program
 program
 .command('put <filename> <_id>')
 .description('Copy <filename> file from the local file system into GridFS storage with this <_id>. Without the --replace option if the _id exists raises an error')
-.action(function(_id, filename){
-	console.log('Copy ' + filename + ' into GridFS storage with _id '+ _id);
+.action(function(filename, _id, options){
+	if (!options.parent.database) {
+		console.log('Error: <database> required');
+		process.exit(1);
+	}
+	put(filename, _id, options);
 });
 
 program
