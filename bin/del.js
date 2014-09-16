@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient,
 	ObjectID = require('mongodb').ObjectID,
-	Grid = require('mongodb').Grid;
+	GridStore = require('mongodb').GridStore;
 
 /**
  * Delete the file specified by _id from GridFS storage
@@ -47,20 +47,26 @@ module.exports = function(_id, options) {
 					process.exit(1);
 				}
 
-				// Create a new grid instance
-				var grid= new Grid(db, opt.gridfsnamespace);
-
-				// Delete file from gridfs
-				grid.delete(oid, function(err) {
+				// Grid.delete(id) not work properly when id is not a ObjectId (interpreted as a file name)
+				new GridStore(db, oid, doc.filename, 'r', {root: opt.gridfsnamespace}).open(function(err, gridStore) {
 					if (err) {
 						console.log(err);
 						db.close(true);
 						process.exit(1);
 					}
 
-					console.log('File with _id=' + _id + ' deleted!');
+					// Unlink the file
+					gridStore.unlink(function(err) {
+						if (err) {
+							console.log(err);
+							db.close(true);
+							process.exit(1);
+						}
 
-					db.close(true);
+						console.log('File with _id=' + _id + ' deleted!');
+
+						db.close(true);
+					});
 				});
 			});
 		});
