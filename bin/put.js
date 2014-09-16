@@ -60,43 +60,18 @@ module.exports = function(filename, _id, options) {
 					// Create a new grid instance
 					var grid= new Grid(db, opt.gridfsnamespace);
 
-					// if _id exists delete
-					if (doc != null) {
-						grid.delete(oid, function(err) {
-							if (err) {
-								console.log(err);
-								db.close(true);
-								process.exit(1);
-							}
-
-							// Write data to gridfs
-
-							grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename), content_type: opt.content_type}, function(err) {
-								if (err) {
-									console.log(err);
-									db.close(true);
-									process.exit(1);
-								}
-
-								console.log('File with _id=' + _id + ' added!');
-
-								db.close(true);
-							});
-						});
-					} else {
-						// Write data to gridfs
-						grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename), content_type: opt.content_type}, function(err) {
-							if (err) {
-								console.log(err);
-								db.close(true);
-								process.exit(1);
-							}
-
-							console.log('File with _id=' + _id + ' added!');
-
+					// Write data to gridfs
+					grid.put(data, {_id: oid, root: opt.gridfsnamespace, filename: path.basename(filename), content_type: opt.content_type}, function(err) {
+						if (err) {
+							console.log(err);
 							db.close(true);
-						});
-					}
+							process.exit(1);
+						}
+
+						console.log('File with _id=' + _id + ' added!');
+
+						db.close(true);
+					});
 				});
 			});
 		});
